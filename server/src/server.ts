@@ -9,7 +9,7 @@ const url = process.env["MONGODB_URL"]!
 
 const app = express()
 app.use(morgan(':method :url :response-time'))
-app.use(cors({ origin: "*`" }))
+app.use(cors({ origin: "*" }))
 app.use(express.json())
 app.use(restaurantApi)
 

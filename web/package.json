@@ -8,13 +8,23 @@
     "build": "tsc -b && vite build"
   },
   "dependencies": {
+    "@mantine/core": "^7.16.1",
+    "@mantine/hooks": "^7.16.1",
+    "@mantine/modals": "^7.16.1",
+    "@mantine/notifications": "^7.16.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "swr": "^2.3.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.1",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
+    "tailwindcss": "^3.4.17",
     "typescript": "~5.6.2",
     "vite": "^6.0.5"
   }
