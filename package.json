@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "server:dev": "npm run dev --workspace=server"
+    "server:dev": "npm run dev --workspace=server",
+    "web:dev": "npm run dev --workspace=web"
   },
   "author": "",
   "license": "ISC",
@@ -11,8 +12,5 @@
   "workspaces": [
     "server",
     "web"
-  ],
-  "dependencies": {
-    "express": "^4.21.2"
-  }
+  ]
 }
