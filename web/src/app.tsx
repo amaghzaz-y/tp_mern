@@ -75,7 +75,7 @@ function EditRestaurant({ data }: { data: IRestaurant }) {
   }
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Authentication" size={"lg"}>
+      <Modal opened={opened} onClose={close} title="Edit Restaurant" size={"lg"}>
         <Stack>
           <TextInput label="Name" defaultValue={data.name} onChange={(e) => { setRestaurant({ ...restaurant, name: e.currentTarget.value }) }} />
           <TextInput label="Description" defaultValue={data.description} onChange={(e) => { setRestaurant({ ...restaurant, description: e.currentTarget.value }) }} />
@@ -106,8 +106,9 @@ function CreateRestaurant() {
   }
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Authentication" size={"lg"}>
+      <Modal opened={opened} onClose={close} title="Create Restaurant" size={"lg"}>
         <Stack>
+          <TextInput label="Code" onChange={(e) => { setRestaurant({ ...restaurant, code: Number.parseInt(e.currentTarget.value) }) }} />
           <TextInput label="Name" onChange={(e) => { setRestaurant({ ...restaurant, name: e.currentTarget.value }) }} />
           <TextInput label="Description" onChange={(e) => { setRestaurant({ ...restaurant, description: e.currentTarget.value }) }} />
           <TextInput label="City" onChange={(e) => { setRestaurant({ ...restaurant, city: e.currentTarget.value }) }} />
