@@ -24,11 +24,19 @@ export interface IScore {
 }
 
 
-
 const restaurantSchema = new Schema<IRestaurant>({
     code: { type: Number, required: true, unique: true },
     phone: { type: String, required: true },
-    scoring: { required: true },
+    scoring: {
+        comment: {
+            type: String,
+            required: true
+        },
+        score: {
+            type: Number,
+            required: true
+        }
+    },
     date: Date,
     city: String,
     country: String,
@@ -43,4 +51,4 @@ const restaurantSchema = new Schema<IRestaurant>({
     zip: String
 });
 
-export const Restaurant = model<IRestaurant>('Restaurant', restaurantSchema)
+export const Restaurant = model<IRestaurant>('Restaurant', restaurantSchema, "Restaurant_YA")
