@@ -27,7 +27,7 @@ export interface IScore {
 const restaurantSchema = new Schema<IRestaurant>({
     code: { type: Number, required: true, unique: true },
     phone: { type: String, required: true },
-    scoring: {
+    scoring: [{
         comment: {
             type: String,
             required: true
@@ -36,7 +36,7 @@ const restaurantSchema = new Schema<IRestaurant>({
             type: Number,
             required: true
         }
-    },
+    }],
     date: Date,
     city: String,
     country: String,

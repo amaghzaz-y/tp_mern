@@ -8,9 +8,14 @@ export async function getRestaurantByCode(code: number) {
     return Restaurant.findOne({ code }).exec()
 }
 
-export async function upsertRestaurant(code: number, data: IRestaurant) {
-    return Restaurant.findOneAndUpdate({ code }, data, { new: true }).exec()
+export async function createRestaurant(data: IRestaurant) {
+    return Restaurant.create(data)
 }
+
+export async function updateRestaurant(code: number, data: IRestaurant) {
+    return Restaurant.findOneAndUpdate({ code }, data).exec()
+}
+
 
 export async function deleteRestaurant(code: number) {
     return Restaurant.deleteOne({ code }).exec()
