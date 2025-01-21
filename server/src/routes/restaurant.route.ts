@@ -6,7 +6,7 @@ import {
 
 const restaurantApi = express()
 
-restaurantApi.get("/api/restaurant/all", async (req, res) => {
+restaurantApi.get("/api/restaurant/all", async (_, res) => {
     const restaurants = await getRestaurants(5)
     res.json(restaurants)
 })
