@@ -11,5 +11,8 @@
   "workspaces": [
     "server",
     "web"
-  ]
+  ],
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }
