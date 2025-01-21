@@ -1,47 +1,57 @@
+import { Button, Input, NumberInput, Table, TextInput } from "@mantine/core"
+import { useState } from "react"
 import useSWR from "swr"
 
 export default function App() {
-  const restaurants = useSWR<IRestaurant[]>("restaurants", () => {
-    return fetch("http://localhost:3000/api/restaurant/all").then(res => res.json())
+  const [page, setPage] = useState(-1)
+  const restaurants = useSWR<IRestaurant[]>(`restaurant-${page}`, async () => {
+    if (!page) return
+    if (page === -1) return await fetch("http://localhost:3000/api/restaurant/all").then(res => res.json())
+    const docs = await fetch(`http://localhost:3000/api/restaurant/id/${page}`).then(res => res.json())
+    return [docs] as IRestaurant[]
   })
 
-  return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-br from-slate-800 to-slate-700">
-      <div className="flex w-full justify-center items-center flex-wrap p-2 gap-2">
-        {restaurants.data?.map(r => <Restaurant key={r.code} restaurant={r} />)}
+  const Search = () => {
+    const [code, setCode] = useState(-1)
+    return (
+      <div className="flex gap-2">
+        <TextInput
+          placeholder="All"
+          onChange={(e) => { setCode(Number.parseInt(e.target.value)) }}
+        />
+        <Button onClick={() => setPage(code)}>Search</Button>
+      </div>
+    )
+  }
+  const rows = restaurants.data && restaurants.data.map(r =>
+    <Table.Tr key={r.code}>
+      <Table.Td>{r.code}</Table.Td>
+      <Table.Td>{r.name}</Table.Td>
+      <Table.Td>{r.description}</Table.Td>
+      <Table.Td>{r.city}</Table.Td>
+      <Table.Td>{r.phone}</Table.Td>
+      <Table.Td>{r.type}</Table.Td>
+      <Table.Td><Button size="xs">edit</Button></Table.Td>
+    </Table.Tr>)
 
-      </div>
-    </div>
-  )
-}
-
-function Restaurant({ restaurant }: { restaurant: IRestaurant }) {
   return (
-    <div className="w-64 bg-white/80 hover:bg-white/90 p-2">
-      <div className="flex gap-1 font-bold items-center">
-        <div>
-          {restaurant.name}
-        </div>
-        <div className="text-xs">
-          {restaurant.code}
-        </div>
-      </div>
-      <div className="text-justify">
-        {restaurant.description}
-      </div>
-      <div>
-        {restaurant.city}
-      </div>
-      <div>
-        {restaurant.phone}
-      </div>
-      <div>
-        {restaurant.website}
-      </div>
-      <div>
-        {restaurant.type}
-      </div>
-    </div>
+    <div className="w-screen h-screen flex flex-col p-2 gap-2">
+      <Search />
+      <Table className="w-full h-fit" striped highlightOnHover withTableBorder withColumnBorders>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Code</Table.Th>
+            <Table.Th>Name</Table.Th>
+            <Table.Th>Description</Table.Th>
+            <Table.Th>City</Table.Th>
+            <Table.Th>Phone</Table.Th>
+            <Table.Th>Type</Table.Th>
+            <Table.Th>Edit</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        {restaurants.data && <Table.Tbody>{rows}</Table.Tbody>}
+      </Table>
+    </div >
   )
 }
 
