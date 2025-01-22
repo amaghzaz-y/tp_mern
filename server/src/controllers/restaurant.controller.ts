@@ -1,8 +1,12 @@
 import { Restaurant } from "../models/restaurant";
 import Express from 'express';
 
-export async function getRestaurants(_: Express.Request, res: Express.Response) {
-    const results = await Restaurant.find({}).limit(5).sort({ code: -1 })
+export async function getRestaurants(req: Express.Request, res: Express.Response) {
+    let { limit } = req.query
+    // @ts-ignore
+    if (!limit) limit = 5
+    // @ts-ignore
+    const results = await Restaurant.find({}).limit(+limit).sort({ code: -1 })
     res.json(results)
 }
 
