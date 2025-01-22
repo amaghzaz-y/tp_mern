@@ -23,7 +23,6 @@ export interface IScore {
     score: number
 }
 
-
 const restaurantSchema = new Schema<IRestaurant>({
     code: { type: Number, required: true, unique: true },
     phone: { type: String, required: true },
